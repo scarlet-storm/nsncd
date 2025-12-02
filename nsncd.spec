@@ -6,7 +6,7 @@
 %global forgeurl https://github.com/twosigma/nsncd
 
 Name:           nsncd
-Version:        1.4.1
+Version:        1.5.2
 
 %forgemeta
 Release:        %autorelease
