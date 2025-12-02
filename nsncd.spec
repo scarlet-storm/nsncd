@@ -39,6 +39,12 @@ The name service non-caching daemon.}
 
 %install
 %cargo_install
+# install systemd unit
+mkdir -p %{buildroot}%{_unitdir}
+mkdir -p %{buildroot}%{_libexecdir}
+mv %{buildroot}%{_bindir}/nsncd %{buildroot}%{_libexecdir}
+install -m 0644 nsncd.service %{buildroot}%{_unitdir}
+sed -i -e "s|/usr/lib/nsncd|/usr/libexec/nsncd|g" %{buildroot}%{_unitdir}/nsncd.service
 
 %if %{with check}
 %check
@@ -49,8 +55,8 @@ The name service non-caching daemon.}
 %license LICENSE
 %license LICENSE.dependencies
 %doc README.md
-%{_bindir}/nsncd
-nsncd.service %{_unitdir}/nsncd.service
+%{_libexecdir}/nsncd
+%{_unitdir}/nsncd.service
 
 %changelog
 %autochangelog
